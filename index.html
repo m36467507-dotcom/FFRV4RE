@@ -277,17 +277,25 @@
             animation: popIn 0.6s ease;
         }
 
-        .heart {
-            font-size: 80px;
+        /* ========== القلب الكبير اللي بينبض ========== */
+        .big-heart-btn {
+            font-size: 100px;
             cursor: pointer;
             display: inline-block;
             transition: 0.2s;
             animation: beat 1.2s infinite;
             user-select: none;
+            background: none;
+            border: none;
+            padding: 10px;
         }
 
-        .heart:active {
+        .big-heart-btn:active {
             transform: scale(0.8);
+        }
+
+        .big-heart-btn:hover {
+            transform: scale(1.1);
         }
 
         h1 {
@@ -309,21 +317,7 @@
             border-radius: 40px;
         }
 
-        .photo-frame {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 15px auto 20px;
-            border: 5px solid #d84b6b;
-            box-shadow: 0 8px 20px rgba(200, 50, 80, 0.3);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        /* ========== تم إزالة إطار الصورة ========== */
 
         .countdown {
             background: #ffffffcc;
@@ -528,8 +522,7 @@
         @media (max-width: 480px) {
             .container { padding: 25px 15px; }
             h1 { font-size: 22px; }
-            .heart { font-size: 60px; }
-            .photo-frame { width: 140px; height: 140px; }
+            .big-heart-btn { font-size: 70px; }
             .timer { font-size: 16px; gap: 8px; }
             .timer span { padding: 5px 10px; min-width: 40px; }
             .login-box { padding: 30px 20px; }
@@ -561,6 +554,7 @@
             <input type="password" id="passwordInput" placeholder="••••" maxlength="10" />
             <button onclick="checkPassword()">✨ ادخلي يا قمر ✨</button>
             <p class="error" id="loginError">❌ كلمة السر غلط يا حبيبتي، حاولي تاني ❤️</p>
+
         </div>
     </div>
 
@@ -584,17 +578,16 @@
     <div id="mainContent">
         <div class="container">
 
-            <div class="heart" id="heart">❤️</div>
+            <!-- القلب الكبير اللي بينبض وبيتضغط عليه -->
+            <button class="big-heart-btn" id="heartBtn" onclick="changeLoveMessage()">❤️</button>
 
-            <h1>يا أحلى بنت في الدنيا 💕</h1>
+            <h1>أحلى بنت في الدنيا 💕</h1>
             <p class="sub">من غيرك الدنيا مش حلوة يا ست الكل</p>
 
-            <div class="photo-frame">
-                <img src="https://via.placeholder.com/300/ffb6c1/ffffff?text=صورتك+يا+قمر" alt="حبيبتي" />
-            </div>
+            <!-- تم إزالة إطار الصورة -->
 
             <div class="countdown">
-                <h3>⏳ من يوم ما قلتيلي بحبك 💕</h3>
+                <h3>⏳ من يوم ما قلتيلي بحبك ❤️</h3>
                 <div class="timer" id="countdownTimer">
                     <span id="days">00</span> <span class="label">يوم</span>
                     <span id="hours">00</span> <span class="label">ساعة</span>
@@ -604,7 +597,7 @@
             </div>
 
             <div id="messageBox" class="message-box">
-                اضغط على القلب ♥
+                اضغط على القلب ❤️
             </div>
 
             <div class="lyrics-container" id="lyricsContainer">
@@ -622,13 +615,14 @@
 
             <div class="buttons">
                 <button onclick="showLove()">🌹 كلمني حب</button>
-                <button onclick="toggleMusic()">⏸️ إيقاف الأغنية</button>
+                <button onclick="toggleMusic()" id="musicToggleBtn">▶️ تشغيل الأغنية</button>
             </div>
 
             <p class="footer">🇪🇬 من قلب مصري بيحبك ❤️</p>
         </div>
     </div>
 
+    <!-- ========== مصدر الصوت ========== -->
     <audio id="loveSong" src="song.mp3"></audio>
 
     <script>
@@ -725,7 +719,7 @@
 
             setTimeout(() => {
                 playMusic();
-            }, 300);
+            }, 500);
 
             if (!flowersStarted) {
                 flowersStarted = true;
@@ -736,7 +730,7 @@
             setInterval(updateCountdown, 1000);
         }
 
-        // ---- 5. رسائل الحب ----
+        // ---- 5. رسائل الحب (بتتغير بالضغط على القلب) ----
         const loveMessages = [
             "♡ يا روح قلبي، انتي كل حاجة في حياتي",
             "♡ ضحكتك بتخلص هموم الدنيا كلها",
@@ -750,14 +744,16 @@
             "♡ كلام الحب قليل قدام عيونك"
         ];
 
-        document.getElementById('heart').addEventListener('click', function() {
+        // دالة جديدة لتغيير الرسالة عند الضغط على القلب
+        function changeLoveMessage() {
             const box = document.getElementById('messageBox');
             const randomIndex = Math.floor(Math.random() * loveMessages.length);
             box.innerHTML = loveMessages[randomIndex];
             box.style.transform = 'scale(0.95)';
             setTimeout(() => { box.style.transform = 'scale(1)'; }, 150);
-        });
+        }
 
+        // دالة زر "كلمني حب"
         function showLove() {
             const box = document.getElementById('messageBox');
             const randomIndex = Math.floor(Math.random() * loveMessages.length);
@@ -768,10 +764,7 @@
         const audio = document.getElementById('loveSong');
         let isPlaying = false;
 
-        // =============================================
         // كلمات أغنية "مش حبيبي بس" - أنغام
-        // التوقيت تقريبي (هتظبطه حسب نسخة الأغنية)
-        // =============================================
         const lyrics = [
             { time: 0, text: '🎵 مش حبيبي بس.. أنا حبيبي' },
             { time: 4, text: '❤️ أنا اللي قلبي ليكي' },
@@ -793,31 +786,39 @@
         let currentLyricIndex = 0;
 
         function playMusic() {
-            audio.play().then(() => {
-                isPlaying = true;
-                document.querySelector('.buttons button:last-child').textContent = '⏸️ إيقاف الأغنية';
-                startLyrics();
-                updateProgress();
-            }).catch(() => {
-                alert('❌ مفيش أغنية موجودة!\n\n📥 حمل أغنية "مش حبيبي بس" لأنغام\n📁 سمي الملف song.mp3\n📂 وحطه جنب ملف index.html');
-            });
+            const audio = document.getElementById('loveSong');
+            audio.play()
+                .then(() => {
+                    isPlaying = true;
+                    document.getElementById('musicToggleBtn').textContent = '⏸️ إيقاف الأغنية';
+                    startLyrics();
+                    updateProgress();
+                })
+                .catch((error) => {
+                    console.error('خطأ في تشغيل الأغنية:', error);
+                    alert('❌ مفيش أغنية موجودة!\n\n📥 حمل أغنية "مش حبيبي بس" لأنغام\n📁 سمي الملف song.mp3\n📂 وحطه جنب ملف index.html');
+                });
         }
 
         function toggleMusic() {
+            const audio = document.getElementById('loveSong');
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
-                document.querySelector('.buttons button:last-child').textContent = '▶️ تشغيل الأغنية';
+                document.getElementById('musicToggleBtn').textContent = '▶️ تشغيل الأغنية';
                 clearInterval(lyricInterval);
             } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    document.querySelector('.buttons button:last-child').textContent = '⏸️ إيقاف الأغنية';
-                    startLyrics();
-                    updateProgress();
-                }).catch(() => {
-                    alert('مفيش أغنية موجودة، ضيف ملف song.mp3 🎵');
-                });
+                audio.play()
+                    .then(() => {
+                        isPlaying = true;
+                        document.getElementById('musicToggleBtn').textContent = '⏸️ إيقاف الأغنية';
+                        startLyrics();
+                        updateProgress();
+                    })
+                    .catch((error) => {
+                        console.error('خطأ في تشغيل الأغنية:', error);
+                        alert('❌ مفيش أغنية موجودة!\n\n📥 حمل أغنية "مش حبيبي بس" لأنغام\n📁 سمي الملف song.mp3\n📂 وحطه جنب ملف index.html');
+                    });
             }
         }
 
@@ -830,13 +831,12 @@
             lines.forEach(line => line.classList.remove('active'));
 
             lyricInterval = setInterval(() => {
+                const audio = document.getElementById('loveSong');
                 const currentTime = audio.currentTime;
-                let found = false;
 
                 for (let i = 0; i < lyrics.length; i++) {
                     if (currentTime >= lyrics[i].time) {
                         currentLyricIndex = i;
-                        found = true;
                     }
                 }
 
@@ -852,13 +852,14 @@
                 if (audio.ended) {
                     clearInterval(lyricInterval);
                     isPlaying = false;
-                    document.querySelector('.buttons button:last-child').textContent = '▶️ تشغيل الأغنية';
+                    document.getElementById('musicToggleBtn').textContent = '▶️ تشغيل الأغنية';
                 }
             }, 500);
         }
 
         // ---- 7. مؤقت التقدم ----
         function updateProgress() {
+            const audio = document.getElementById('loveSong');
             const progressFill = document.getElementById('progressFill');
             const currentTimeDisplay = document.getElementById('currentTime');
             const totalTimeDisplay = document.getElementById('totalTime');
@@ -868,24 +869,30 @@
             });
 
             audio.addEventListener('timeupdate', () => {
-                const progress = (audio.currentTime / audio.duration) * 100;
-                progressFill.style.width = progress + '%';
-                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+                if (audio.duration) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    progressFill.style.width = progress + '%';
+                    currentTimeDisplay.textContent = formatTime(audio.currentTime);
+                }
             });
         }
 
         function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return '0:00';
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return mins + ':' + (secs < 10 ? '0' : '') + secs;
         }
 
         function seekAudio(e) {
+            const audio = document.getElementById('loveSong');
             const bar = document.getElementById('progressBar');
             const rect = bar.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const percent = x / rect.width;
-            audio.currentTime = percent * audio.duration;
+            if (audio.duration) {
+                audio.currentTime = percent * audio.duration;
+            }
         }
 
         // ---- 8. العد التنازلي من آخر جمعة ----
@@ -957,12 +964,21 @@
         }
         initLyrics();
 
-        console.log('❤️ الموقع جاهز يا حبيبي!');
-        console.log('📅 آخر جمعة كانت: ' + targetDate.toLocaleDateString('ar-EG'));
-        console.log('🎵 الأغنية: مش حبيبي بس - أنغام');
-        console.log('💡 محتاج تحمل الأغنية وتسميها song.mp3');
-        console.log('⏱️ لو التوقيت مش مضبوط، غير أوقات الكلمات في مصفوفة lyrics');
-    </script>
+        // ---- 11. التحقق من وجود الأغنية عند التحميل ----
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('loveSong');
+            // نفحص إذا كان الملف موجود
+            fetch('song.mp3')
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('⚠️ ملف الأغنية مش موجود!');
+                    } else {
+                        console.log('✅ ملف الأغنية موجود');
+                    }
+                })
+                .catch(() => {
+                    console.warn('⚠️ ملف الأغنية مش موجود!');
+                });
+        });
 
-</body>
-</html>
+        console.log('❤️ الموقع جاه
