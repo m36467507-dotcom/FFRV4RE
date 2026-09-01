@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>♡ لحبيبتي ♡</title>
+    <title>♡ بحبك ♡</title>
 
     <style>
         * {
@@ -21,6 +21,100 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+        }
+
+        /* ========== قلب كبير جداً بيتحرك ========== */
+        .heart-wrapper {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: floatHeart 4s ease-in-out infinite;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(30px) rotate(5deg);
+            }
+        }
+
+        .big-heart {
+            font-size: 250px;
+            animation: pulse 1s ease-in-out infinite;
+            cursor: pointer;
+            display: inline-block;
+            text-shadow: 0 0 100px rgba(255, 50, 80, 0.8), 0 0 200px rgba(255, 50, 80, 0.4);
+            user-select: none;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: 0.1s;
+            position: relative;
+        }
+
+        .big-heart:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 150px rgba(255, 50, 80, 1), 0 0 300px rgba(255, 50, 80, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.2); }
+            60% { transform: scale(1); }
+        }
+
+        /* ========== كلمة "بحبك" بتظهر وتتحرك ========== */
+        .love-word {
+            position: fixed;
+            font-size: 80px;
+            font-weight: bold;
+            color: #ff4d6d;
+            text-shadow: 0 0 50px rgba(255, 50, 80, 0.6), 0 0 100px rgba(255, 50, 80, 0.3);
+            pointer-events: none;
+            z-index: 3;
+            animation: flyWord 8s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .love-word.show {
+            opacity: 1;
+        }
+
+        @keyframes flyWord {
+            0% {
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            20% {
+                transform: translate(100px, -200px) scale(1.2) rotate(10deg);
+                opacity: 1;
+            }
+            40% {
+                transform: translate(-150px, -100px) scale(1) rotate(-15deg);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(200px, 100px) scale(1.3) rotate(20deg);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-100px, 200px) scale(0.9) rotate(-10deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
         }
 
         /* ========== قلوب متطايرة ========== */
@@ -53,120 +147,6 @@
                 transform: translateY(-10vh) rotate(720deg) scale(1.5);
                 opacity: 0;
             }
-        }
-
-        /* ========== القلب الكبير ========== */
-        .big-heart-container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .big-heart {
-            font-size: 180px;
-            animation: pulse 1.2s ease-in-out infinite;
-            cursor: pointer;
-            display: inline-block;
-            transition: 0.3s;
-            text-shadow: 0 0 80px rgba(255, 50, 80, 0.6);
-            user-select: none;
-            background: none;
-            border: none;
-            line-height: 1;
-        }
-
-        .big-heart:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 120px rgba(255, 50, 80, 0.9);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            15% { transform: scale(1.25); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
-        }
-
-        .title {
-            color: #ffb6c1;
-            font-size: 48px;
-            font-weight: bold;
-            margin-top: 25px;
-            text-shadow: 0 0 40px rgba(255, 50, 80, 0.4);
-            letter-spacing: 3px;
-        }
-
-        .subtitle {
-            color: #ff8fa3;
-            font-size: 26px;
-            margin-top: 15px;
-            opacity: 0.9;
-            letter-spacing: 2px;
-        }
-
-        /* ========== رسالة الحالة ========== */
-        #status {
-            color: #ffb6c1;
-            font-size: 32px;
-            margin-top: 35px;
-            font-weight: bold;
-            min-height: 60px;
-            transition: 0.5s;
-            text-shadow: 0 0 30px rgba(255, 50, 80, 0.4);
-        }
-
-        /* ========== الأزرار ========== */
-        .button-container {
-            margin-top: 40px;
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            min-height: 80px;
-        }
-
-        .btn {
-            padding: 18px 50px;
-            border: none;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-yes {
-            background: linear-gradient(145deg, #ff4d6d, #d84b6b);
-            color: white;
-            box-shadow: 0 8px 0 #892e44, 0 15px 40px rgba(216, 75, 107, 0.4);
-        }
-
-        .btn-yes:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 0 #892e44, 0 20px 50px rgba(216, 75, 107, 0.6);
-        }
-
-        .btn-yes:active {
-            transform: translateY(5px);
-            box-shadow: 0 3px 0 #892e44;
-        }
-
-        .btn-no {
-            background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
-            color: white;
-            box-shadow: 0 8px 0 #1a1a1a;
-            position: relative;
-            transition: 0.1s;
-            z-index: 2;
-        }
-
-        .btn-no:hover {
-            background: linear-gradient(145deg, #6a6a6a, #4a4a4a);
         }
 
         /* ========== فقاعات ========== */
@@ -225,14 +205,14 @@
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* ========== زخات القلوب (اللي بتنزل عند الضغط) ========== */
+        /* ========== زخات القلوب ========== */
         .heart-rain {
             position: fixed;
             top: -50px;
             font-size: 40px;
             animation: rainDown linear infinite;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
             opacity: 0.8;
         }
 
@@ -249,6 +229,185 @@
             }
         }
 
+        /* ========== العنوان ========== */
+        .title {
+            color: #ffb6c1;
+            font-size: 48px;
+            font-weight: bold;
+            margin-top: 30px;
+            text-shadow: 0 0 40px rgba(255, 50, 80, 0.4);
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 60px rgba(255, 50, 80, 0.6); }
+        }
+
+        .subtitle {
+            color: #ff8fa3;
+            font-size: 26px;
+            margin-top: 15px;
+            opacity: 0.9;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            animation: floatText 3s ease-in-out infinite;
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ========== رسالة الحالة ========== */
+        #status {
+            color: #ffb6c1;
+            font-size: 32px;
+            margin-top: 30px;
+            font-weight: bold;
+            min-height: 60px;
+            transition: 0.5s;
+            text-shadow: 0 0 30px rgba(255, 50, 80, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ========== الأزرار ========== */
+        .button-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-yes {
+            background: linear-gradient(145deg, #ff4d6d, #d84b6b);
+            color: white;
+            box-shadow: 0 8px 0 #892e44, 0 15px 40px rgba(216, 75, 107, 0.4);
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 0 #892e44, 0 20px 60px rgba(216, 75, 107, 0.6); }
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 0 #892e44, 0 20px 50px rgba(216, 75, 107, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #892e44;
+        }
+
+        .btn-no {
+            background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+            color: white;
+            box-shadow: 0 8px 0 #1a1a1a;
+            position: relative;
+            transition: 0.1s;
+            z-index: 2;
+        }
+
+        .btn-no:hover {
+            background: linear-gradient(145deg, #6a6a6a, #4a4a4a);
+        }
+
+        /* ========== كلمة "بحبك" الطائرة ========== */
+        .flying-text {
+            position: fixed;
+            font-size: 100px;
+            font-weight: bold;
+            color: #ff4d6d;
+            text-shadow: 0 0 80px rgba(255, 50, 80, 0.8);
+            pointer-events: none;
+            z-index: 5;
+            animation: flyAround 6s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .flying-text.show {
+            opacity: 1;
+        }
+
+        @keyframes flyAround {
+            0% {
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(50px, -100px) scale(1) rotate(5deg);
+            }
+            30% {
+                transform: translate(-200px, -50px) scale(1.2) rotate(-10deg);
+            }
+            50% {
+                transform: translate(300px, 50px) scale(1.5) rotate(15deg);
+            }
+            70% {
+                transform: translate(-150px, 150px) scale(1.1) rotate(-8deg);
+            }
+            90% {
+                transform: translate(100px, -50px) scale(1.3) rotate(8deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== تكيف للموبايل ========== */
+        @media (max-width: 480px) {
+            .big-heart { font-size: 160px; }
+            .title { font-size: 32px; }
+            .subtitle { font-size: 20px; }
+            .btn { padding: 14px 30px; font-size: 20px; }
+            #status { font-size: 24px; }
+            .love-word { font-size: 50px; }
+            .flying-text { font-size: 60px; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-20px); }
+            40% { transform: translateX(20px); }
+            60% { transform: translateX(-15px); }
+            80% { transform: translateX(15px); }
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { background: linear-gradient(135deg, #1a0a0a, #2d0a0a, #1a0a0a); }
+            50% { background: linear-gradient(135deg, #2d0a0a, #4a0a0a, #2d0a0a); }
+        }
+
+        body.bg-glow {
+            animation: bgPulse 1s ease;
+        }
+
         /* ========== رسائل الحب المتغيرة ========== */
         .love-message {
             color: #ff8fa3;
@@ -258,36 +417,9 @@
             min-height: 40px;
             transition: 0.5s;
             font-weight: 500;
-        }
-
-        /* ========== تكيف للموبايل ========== */
-        @media (max-width: 480px) {
-            .big-heart { font-size: 130px; }
-            .title { font-size: 32px; }
-            .subtitle { font-size: 20px; }
-            .btn { padding: 14px 30px; font-size: 20px; }
-            #status { font-size: 24px; }
-            .love-message { font-size: 18px; }
-            .button-container { gap: 20px; }
-        }
-
-        /* ========== حركة الشاشة ========== */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-20px); }
-            40% { transform: translateX(20px); }
-            60% { transform: translateX(-15px); }
-            80% { transform: translateX(15px); }
-        }
-
-        /* ========== تأثير وميض للخلفية ========== */
-        @keyframes bgPulse {
-            0%, 100% { background: linear-gradient(135deg, #1a0a0a, #2d0a0a, #1a0a0a); }
-            50% { background: linear-gradient(135deg, #2d0a0a, #4a0a0a, #2d0a0a); }
-        }
-
-        body.bg-glow {
-            animation: bgPulse 1s ease;
+            position: relative;
+            z-index: 2;
+            animation: floatText 3s ease-in-out infinite;
         }
     </style>
 </head>
@@ -302,10 +434,16 @@
     <!-- ========== نجوم ========== -->
     <div class="stars" id="stars"></div>
 
-    <!-- ========== المحتوى الرئيسي ========== -->
-    <div class="big-heart-container">
+    <!-- ========== كلمة "بحبك" الطائرة ========== -->
+    <div class="flying-text" id="flyingText">💕 بحبك 💕</div>
 
-        <!-- القلب الكبير -->
+    <!-- ========== كلمة "بحبك" الثابتة (تظهر وتختفي) ========== -->
+    <div class="love-word" id="loveWord">❤️ بحبك ❤️</div>
+
+    <!-- ========== المحتوى الرئيسي ========== -->
+    <div class="heart-wrapper">
+
+        <!-- القلب الكبير جداً -->
         <button class="big-heart" id="mainHeart" onclick="showLove()">❤️</button>
 
         <!-- العنوان -->
@@ -335,12 +473,12 @@
             var container = document.getElementById('floatingHearts');
             var hearts = ['❤️', '💕', '💖', '💗', '💓', '♥️', '💝'];
 
-            for (var i = 0; i < 35; i++) {
+            for (var i = 0; i < 40; i++) {
                 var heart = document.createElement('span');
                 heart.className = 'heart-float';
                 heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
                 heart.style.left = Math.random() * 100 + '%';
-                heart.style.fontSize = (25 + Math.random() * 45) + 'px';
+                heart.style.fontSize = (25 + Math.random() * 50) + 'px';
                 heart.style.animationDuration = (12 + Math.random() * 22) + 's';
                 heart.style.animationDelay = (Math.random() * 18) + 's';
                 container.appendChild(heart);
@@ -351,11 +489,11 @@
         // ---- 2. فقاعات ----
         function createBubbles() {
             var container = document.getElementById('bubbles');
-            for (var i = 0; i < 25; i++) {
+            for (var i = 0; i < 30; i++) {
                 var bubble = document.createElement('span');
                 bubble.className = 'bubble';
                 bubble.style.left = Math.random() * 100 + '%';
-                var size = 15 + Math.random() * 40;
+                var size = 15 + Math.random() * 45;
                 bubble.style.width = size + 'px';
                 bubble.style.height = size + 'px';
                 bubble.style.animationDuration = (18 + Math.random() * 28) + 's';
@@ -371,13 +509,13 @@
             var container = document.getElementById('stars');
             var emojis = ['✦', '✧', '⭐', '✨', '💫', '✶'];
 
-            for (var i = 0; i < 60; i++) {
+            for (var i = 0; i < 70; i++) {
                 var star = document.createElement('span');
                 star.className = 'star';
                 star.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.fontSize = (12 + Math.random() * 24) + 'px';
+                star.style.fontSize = (12 + Math.random() * 26) + 'px';
                 star.style.animationDelay = (Math.random() * 4) + 's';
                 star.style.animationDuration = (2 + Math.random() * 3) + 's';
                 container.appendChild(star);
@@ -386,20 +524,25 @@
         createStars();
 
         // ---- 4. زخات القلوب ----
-        function createHeartRain() {
-            var body = document.body;
-            var heart = document.createElement('span');
-            heart.className = 'heart-rain';
-            var hearts = ['❤️', '💕', '💖', '💗', '💓', '♥️', '💝'];
-            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.left = (Math.random() * 92 + 4) + '%';
-            heart.style.fontSize = (30 + Math.random() * 50) + 'px';
-            heart.style.animationDuration = (3.5 + Math.random() * 4.5) + 's';
-            body.appendChild(heart);
+        function createHeartRain(count) {
+            count = count || 1;
+            for (var j = 0; j < count; j++) {
+                setTimeout(function() {
+                    var body = document.body;
+                    var heart = document.createElement('span');
+                    heart.className = 'heart-rain';
+                    var hearts = ['❤️', '💕', '💖', '💗', '💓', '♥️', '💝'];
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = (Math.random() * 92 + 4) + '%';
+                    heart.style.fontSize = (30 + Math.random() * 55) + 'px';
+                    heart.style.animationDuration = (3.5 + Math.random() * 4.5) + 's';
+                    body.appendChild(heart);
 
-            setTimeout(function() {
-                heart.remove();
-            }, 8000);
+                    setTimeout(function() {
+                        heart.remove();
+                    }, 8000);
+                }, j * 120);
+            }
         }
 
         // ---- 5. رسائل الحب ----
@@ -447,10 +590,8 @@
                 status.style.color = '#ffb6c1';
             }, 400);
 
-            // زخات قلوب (8 قلوب)
-            for (var i = 0; i < 10; i++) {
-                setTimeout(createHeartRain, i * 120);
-            }
+            // زخات قلوب (12 قلب)
+            createHeartRain(12);
 
             // تأثير وميض الخلفية
             document.body.classList.add('bg-glow');
@@ -460,10 +601,24 @@
 
             // تكبير القلب مؤقتاً
             var heart = document.getElementById('mainHeart');
-            heart.style.transform = 'scale(1.4)';
+            heart.style.transform = 'scale(1.5)';
             setTimeout(function() {
                 heart.style.transform = 'scale(1)';
             }, 300);
+
+            // إظهار كلمة "بحبك" الطائرة
+            var flyingText = document.getElementById('flyingText');
+            flyingText.classList.add('show');
+            setTimeout(function() {
+                flyingText.classList.remove('show');
+            }, 6000);
+
+            // إظهار كلمة "بحبك" الثابتة
+            var loveWord = document.getElementById('loveWord');
+            loveWord.classList.add('show');
+            setTimeout(function() {
+                loveWord.classList.remove('show');
+            }, 3000);
         }
 
         // ---- 6. زر "بحبك" ----
@@ -471,16 +626,14 @@
             var status = document.getElementById('status');
             status.textContent = '❤️ أنا كمان بحبك موت ❤️';
             status.style.color = '#ff6b8a';
-            status.style.fontSize = '40px';
-            status.style.transform = 'scale(1.3)';
+            status.style.fontSize = '44px';
+            status.style.transform = 'scale(1.4)';
             setTimeout(function() {
                 status.style.transform = 'scale(1)';
             }, 500);
 
-            // زخات قلوب كثيفة (25 قلب)
-            for (var i = 0; i < 25; i++) {
-                setTimeout(createHeartRain, i * 100);
-            }
+            // زخات قلوب كثيفة (30 قلب)
+            createHeartRain(30);
 
             // تغيير خلفية
             document.body.style.background = 'linear-gradient(135deg, #4a0a0a, #6a0a0a, #4a0a0a)';
@@ -497,13 +650,36 @@
 
             // تكبير القلب
             var heart = document.getElementById('mainHeart');
-            heart.style.transform = 'scale(1.5)';
+            heart.style.transform = 'scale(1.7)';
             setTimeout(function() {
                 heart.style.transform = 'scale(1)';
-            }, 400);
+            }, 500);
 
             // تغيير رسالة الحب
             document.getElementById('loveMessage').textContent = '💖 أنتِ كل الدنيا بالنسبة لي';
+
+            // إظهار كلمة "بحبك" الطائرة
+            var flyingText = document.getElementById('flyingText');
+            flyingText.classList.add('show');
+            setTimeout(function() {
+                flyingText.classList.remove('show');
+            }, 8000);
+
+            // إظهار كلمة "بحبك" الثابتة
+            var loveWord = document.getElementById('loveWord');
+            loveWord.classList.add('show');
+            setTimeout(function() {
+                loveWord.classList.remove('show');
+            }, 4000);
+
+            // تشغيل تأثير إضافي كل 2 ثانية
+            var interval = setInterval(function() {
+                createHeartRain(5);
+            }, 2000);
+
+            setTimeout(function() {
+                clearInterval(interval);
+            }, 8000);
         }
 
         // ---- 7. زر "لا" يهرب ----
@@ -550,7 +726,6 @@
                 btn.style.fontSize = '26px';
                 btn.style.padding = '18px 50px';
 
-                // يخليها تضغط "بحبك" لوحدها بعد شوية
                 setTimeout(function() {
                     sayYes();
                 }, 600);
@@ -562,19 +737,29 @@
             setTimeout(function() { document.body.style.animation = ''; }, 300);
 
             // قلب يتساقط
-            createHeartRain();
+            createHeartRain(2);
         }
 
-        // ---- 8. تغيير الرسالة كل 6 ثواني ----
+        // ---- 8. تغيير الرسالة كل 5 ثواني ----
         setInterval(function() {
             var msgBox = document.getElementById('loveMessage');
             var randomIndex = Math.floor(Math.random() * loveMessages.length);
             msgBox.textContent = loveMessages[randomIndex];
-        }, 6000);
+        }, 5000);
+
+        // ---- 9. كلمة "بحبك" تظهر وتختفي تلقائياً ----
+        setInterval(function() {
+            var loveWord = document.getElementById('loveWord');
+            loveWord.classList.add('show');
+            setTimeout(function() {
+                loveWord.classList.remove('show');
+            }, 3000);
+        }, 7000);
 
         console.log('❤️ موقع الحب جاهز!');
         console.log('💕 كل القلوب بتنبض ليكِ');
         console.log('💖 قلبك بينبض بالحب');
+        console.log('❤️ بحبك ❤️');
     </script>
 
 </body>
