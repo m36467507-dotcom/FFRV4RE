@@ -6,7 +6,6 @@
     <title>♡ لحبيبتي ♡</title>
 
     <style>
-        /* ========== التصميم العام ========== */
         * {
             margin: 0;
             padding: 0;
@@ -16,455 +15,16 @@
         body {
             font-family: 'Tahoma', 'Segoe UI', sans-serif;
             min-height: 100vh;
+            background: linear-gradient(135deg, #1a0a0a, #2d0a0a, #1a0a0a);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(145deg, #fff0f5, #ffe6ec);
             overflow: hidden;
             position: relative;
         }
 
-        /* ========== شاشة الدخول (الباسورد) ========== */
-        #loginScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: 0.8s;
-        }
-
-        #loginScreen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .login-box {
-            background: linear-gradient(145deg, #ffffff, #ffe6ec);
-            padding: 50px 40px;
-            border-radius: 60px 20px 60px 20px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            border: 3px solid #ffb6c1;
-        }
-
-        .login-box h1 {
-            color: #a02b4a;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .login-box .sub {
-            color: #7a3b4a;
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
-
-        .login-box .heart-icon {
-            font-size: 70px;
-            display: block;
-            margin-bottom: 15px;
-            animation: beat 1.2s infinite;
-        }
-
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.2); }
-            60% { transform: scale(1); }
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 3px solid #d84b6b;
-            border-radius: 50px;
-            font-size: 20px;
-            text-align: center;
-            outline: none;
-            background: white;
-            color: #4d1f2b;
-            font-weight: bold;
-            letter-spacing: 3px;
-            transition: 0.3s;
-        }
-
-        .login-box input:focus {
-            border-color: #a02b4a;
-            box-shadow: 0 0 20px rgba(216, 75, 107, 0.3);
-        }
-
-        .login-box button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 15px;
-            background: #d84b6b;
-            border: none;
-            border-radius: 50px;
-            font-size: 22px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 6px 0 #892e44;
-        }
-
-        .login-box button:hover {
-            background: #c03a58;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0 #6f2336;
-        }
-
-        .login-box button:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #6f2336;
-        }
-
-        .login-box .error {
-            color: #d84b6b;
-            font-size: 16px;
-            margin-top: 15px;
-            display: none;
-            font-weight: bold;
-        }
-
-        /* ========== شاشة السؤال ========== */
-        #questionScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            transition: 0.5s;
-        }
-
-        #questionScreen.active {
-            display: flex;
-        }
-
-        .question-box {
-            background: linear-gradient(145deg, #ffffff, #ffe6ec);
-            padding: 50px 40px;
-            border-radius: 60px 20px 60px 20px;
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            border: 3px solid #ffb6c1;
-            animation: popIn 0.5s ease;
-            position: relative;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .question-box h1 {
-            color: #a02b4a;
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-
-        .question-box .big-heart {
-            font-size: 80px;
-            display: block;
-            margin: 10px 0;
-            animation: beat 1.2s infinite;
-        }
-
-        .question-box p {
-            color: #7a3b4a;
-            font-size: 22px;
-            font-weight: 600;
-            margin: 15px 0 25px;
-        }
-
-        .question-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            position: relative;
-            min-height: 80px;
-        }
-
-        .btn-yes {
-            background: #4CAF50;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 6px 0 #2e7d32;
-            min-width: 120px;
-            z-index: 2;
-        }
-
-        .btn-yes:hover {
-            background: #388E3C;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0 #1b5e20;
-        }
-
-        .btn-no {
-            background: #d84b6b;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.05s;
-            box-shadow: 0 6px 0 #892e44;
-            min-width: 120px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-no:hover {
-            background: #c03a58;
-        }
-
-        /* ========== المحتوى الرئيسي ========== */
-        #mainContent {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        #mainContent.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            padding: 40px 30px;
-            border-radius: 60px 20px 60px 20px;
-            box-shadow: 0 20px 40px rgba(200, 50, 80, 0.25);
-            max-width: 600px;
-            width: 100%;
-            border: 2px solid #ffb6c1;
-            position: relative;
-            z-index: 2;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: popIn 0.6s ease;
-        }
-
-        /* ========== القلب الكبير اللي بينبض ========== */
-        .big-heart-btn {
-            font-size: 100px;
-            cursor: pointer;
-            display: inline-block;
-            transition: 0.2s;
-            animation: beat 1.2s infinite;
-            user-select: none;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-
-        .big-heart-btn:active {
-            transform: scale(0.8);
-        }
-
-        .big-heart-btn:hover {
-            transform: scale(1.1);
-        }
-
-        h1 {
-            color: #a02b4a;
-            font-size: 28px;
-            margin: 20px 0 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .sub {
-            color: #7a3b4a;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            background: #ffe0e8;
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 40px;
-        }
-
-        /* ========== تم إزالة إطار الصورة ========== */
-
-        .countdown {
-            background: #ffffffcc;
-            padding: 15px;
-            border-radius: 30px;
-            margin: 15px 0;
-            border: 2px solid #e6869e;
-        }
-
-        .countdown h3 {
-            color: #a02b4a;
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .timer {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #4d1f2b;
-            flex-wrap: wrap;
-        }
-
-        .timer span {
-            background: #d84b6b;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 20px;
-            min-width: 50px;
-        }
-
-        .timer .label {
-            background: transparent;
-            color: #7a3b4a;
-            font-size: 14px;
-            padding: 0;
-            min-width: auto;
-        }
-
-        .message-box {
-            background: #ffffffcc;
-            padding: 20px 15px;
-            border-radius: 30px;
-            margin: 20px 0;
-            font-size: 20px;
-            color: #4d1f2b;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #e6869e;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-
-        .lyrics-container {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 30px;
-            padding: 20px;
-            margin: 15px 0;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 2px solid #ffb6c1;
-        }
-
-        .lyrics-container::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .lyrics-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .lyrics-container::-webkit-scrollbar-thumb {
-            background: #d84b6b;
-            border-radius: 10px;
-        }
-
-        .lyric-line {
-            color: white;
-            font-size: 18px;
-            padding: 8px 12px;
-            margin: 4px 0;
-            border-radius: 15px;
-            transition: 0.4s;
-            opacity: 0.4;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .lyric-line.active {
-            opacity: 1;
-            color: #ffd700;
-            background: rgba(216, 75, 107, 0.3);
-            transform: scale(1.05);
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 20px 0 15px;
-        }
-
-        button {
-            background: #d84b6b;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 6px 0 #892e44;
-            border: 1px solid #ffb3c6;
-            flex: 1 1 auto;
-            min-width: 140px;
-        }
-
-        button:hover {
-            background: #c03a58;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0 #6f2336;
-        }
-
-        button:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #6f2336;
-        }
-
-        .footer {
-            margin-top: 30px;
-            color: #a0455a;
-            font-size: 18px;
-            font-weight: 600;
-            border-top: 2px solid #f7c5d2;
-            padding-top: 20px;
-        }
-
-        .flowers {
+        /* ========== قلوب متطايرة ========== */
+        .floating-hearts {
             position: fixed;
             top: 0;
             left: 0;
@@ -475,65 +35,243 @@
             overflow: hidden;
         }
 
-        .flower {
+        .heart-float {
             position: absolute;
             font-size: 30px;
-            animation: flowerFall linear infinite;
-            opacity: 0.8;
+            animation: floatUp linear infinite;
+            opacity: 0.6;
         }
 
-        @keyframes flowerFall {
+        @keyframes floatUp {
             0% {
-                transform: translateY(-10vh) rotate(0deg) scale(1);
-                opacity: 1;
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
             }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
             100% {
-                transform: translateY(110vh) rotate(720deg) scale(0.3);
+                transform: translateY(-10vh) rotate(720deg) scale(1.5);
                 opacity: 0;
             }
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #ddd;
-            border-radius: 10px;
-            margin: 10px 0;
-            cursor: pointer;
+        /* ========== القلب الكبير ========== */
+        .big-heart-container {
             position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: #d84b6b;
-            border-radius: 10px;
-            width: 0%;
-            transition: 0.1s;
+        .big-heart {
+            font-size: 180px;
+            animation: pulse 1.2s ease-in-out infinite;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.3s;
+            text-shadow: 0 0 80px rgba(255, 50, 80, 0.6);
+            user-select: none;
+            background: none;
+            border: none;
+            line-height: 1;
         }
 
-        .time-display {
+        .big-heart:hover {
+            transform: scale(1.15);
+            text-shadow: 0 0 120px rgba(255, 50, 80, 0.9);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.25); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        .title {
+            color: #ffb6c1;
+            font-size: 48px;
+            font-weight: bold;
+            margin-top: 25px;
+            text-shadow: 0 0 40px rgba(255, 50, 80, 0.4);
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            color: #ff8fa3;
+            font-size: 26px;
+            margin-top: 15px;
+            opacity: 0.9;
+            letter-spacing: 2px;
+        }
+
+        /* ========== رسالة الحالة ========== */
+        #status {
+            color: #ffb6c1;
+            font-size: 32px;
+            margin-top: 35px;
+            font-weight: bold;
+            min-height: 60px;
+            transition: 0.5s;
+            text-shadow: 0 0 30px rgba(255, 50, 80, 0.4);
+        }
+
+        /* ========== الأزرار ========== */
+        .button-container {
+            margin-top: 40px;
             display: flex;
-            justify-content: space-between;
-            color: #7a3b4a;
-            font-size: 14px;
-            font-weight: 600;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
         }
 
+        .btn {
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-yes {
+            background: linear-gradient(145deg, #ff4d6d, #d84b6b);
+            color: white;
+            box-shadow: 0 8px 0 #892e44, 0 15px 40px rgba(216, 75, 107, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 0 #892e44, 0 20px 50px rgba(216, 75, 107, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #892e44;
+        }
+
+        .btn-no {
+            background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+            color: white;
+            box-shadow: 0 8px 0 #1a1a1a;
+            position: relative;
+            transition: 0.1s;
+            z-index: 2;
+        }
+
+        .btn-no:hover {
+            background: linear-gradient(145deg, #6a6a6a, #4a4a4a);
+        }
+
+        /* ========== فقاعات ========== */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            border-radius: 50%;
+            animation: bubbleUp linear infinite;
+            border: 1px solid rgba(255, 182, 193, 0.15);
+        }
+
+        @keyframes bubbleUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% {
+                transform: translateY(-110vh) scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        /* ========== نجوم ========== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: #fff;
+            animation: twinkle 2.5s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; transform: scale(0.7); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* ========== زخات القلوب (اللي بتنزل عند الضغط) ========== */
+        .heart-rain {
+            position: fixed;
+            top: -50px;
+            font-size: 40px;
+            animation: rainDown linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        @keyframes rainDown {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(110vh) rotate(720deg) scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* ========== رسائل الحب المتغيرة ========== */
+        .love-message {
+            color: #ff8fa3;
+            font-size: 22px;
+            margin-top: 25px;
+            opacity: 0.8;
+            min-height: 40px;
+            transition: 0.5s;
+            font-weight: 500;
+        }
+
+        /* ========== تكيف للموبايل ========== */
         @media (max-width: 480px) {
-            .container { padding: 25px 15px; }
-            h1 { font-size: 22px; }
-            .big-heart-btn { font-size: 70px; }
-            .timer { font-size: 16px; gap: 8px; }
-            .timer span { padding: 5px 10px; min-width: 40px; }
-            .login-box { padding: 30px 20px; }
-            .login-box h1 { font-size: 26px; }
-            .lyric-line { font-size: 15px; }
-            .lyric-line.active { font-size: 17px; }
-            .question-box { padding: 30px 20px; }
-            .question-box h1 { font-size: 24px; }
-            .btn-yes, .btn-no { padding: 12px 25px; font-size: 20px; min-width: 90px; }
+            .big-heart { font-size: 130px; }
+            .title { font-size: 32px; }
+            .subtitle { font-size: 20px; }
+            .btn { padding: 14px 30px; font-size: 20px; }
+            #status { font-size: 24px; }
+            .love-message { font-size: 18px; }
+            .button-container { gap: 20px; }
         }
 
+        /* ========== حركة الشاشة ========== */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20% { transform: translateX(-20px); }
@@ -541,444 +279,303 @@
             60% { transform: translateX(-15px); }
             80% { transform: translateX(15px); }
         }
+
+        /* ========== تأثير وميض للخلفية ========== */
+        @keyframes bgPulse {
+            0%, 100% { background: linear-gradient(135deg, #1a0a0a, #2d0a0a, #1a0a0a); }
+            50% { background: linear-gradient(135deg, #2d0a0a, #4a0a0a, #2d0a0a); }
+        }
+
+        body.bg-glow {
+            animation: bgPulse 1s ease;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ========== شاشة الدخول بالباسورد ========== -->
-    <div id="loginScreen">
-        <div class="login-box">
-            <span class="heart-icon">❤️</span>
-            <h1>يا حبيبتي 💕</h1>
-            <p class="sub">ادخلي الكلمة السرية عشان تدخلي للعالم الخاص بيكي</p>
-            <input type="password" id="passwordInput" placeholder="••••" maxlength="10" />
-            <button onclick="checkPassword()">✨ ادخلي يا قمر ✨</button>
-            <p class="error" id="loginError">❌ كلمة السر غلط يا حبيبتي، حاولي تاني ❤️</p>
+    <!-- ========== قلوب متطايرة ========== -->
+    <div class="floating-hearts" id="floatingHearts"></div>
 
-        </div>
-    </div>
+    <!-- ========== فقاعات ========== -->
+    <div class="bubbles" id="bubbles"></div>
 
-    <!-- ========== شاشة السؤال ========== -->
-    <div id="questionScreen">
-        <div class="question-box">
-            <span class="big-heart">💖</span>
-            <h1>سؤال مهم جداً 🥺</h1>
-            <p>بتحبيني ولا لا؟</p>
-            <div class="question-buttons">
-                <button class="btn-yes" onclick="answerYes()">🩷 أيوه</button>
-                <button class="btn-no" id="noBtn" onmouseover="runAway()">💔 لا</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== الورود المتساقطة ========== -->
-    <div class="flowers" id="flowersContainer"></div>
+    <!-- ========== نجوم ========== -->
+    <div class="stars" id="stars"></div>
 
     <!-- ========== المحتوى الرئيسي ========== -->
-    <div id="mainContent">
-        <div class="container">
+    <div class="big-heart-container">
 
-            <!-- القلب الكبير اللي بينبض وبيتضغط عليه -->
-            <button class="big-heart-btn" id="heartBtn" onclick="changeLoveMessage()">❤️</button>
+        <!-- القلب الكبير -->
+        <button class="big-heart" id="mainHeart" onclick="showLove()">❤️</button>
 
-            <h1>أحلى بنت في الدنيا 💕</h1>
-            <p class="sub">من غيرك الدنيا مش حلوة يا ست الكل</p>
+        <!-- العنوان -->
+        <div class="title">أحلى بنت في الدنيا 💕</div>
+        <div class="subtitle">قلبي بينبض باسمك</div>
 
-            <!-- تم إزالة إطار الصورة -->
+        <!-- رسالة الحالة -->
+        <div id="status">💖 أنتِ كل حياتي</div>
 
-            <div class="countdown">
-                <h3>⏳ من يوم ما قلتيلي بحبك ❤️</h3>
-                <div class="timer" id="countdownTimer">
-                    <span id="days">00</span> <span class="label">يوم</span>
-                    <span id="hours">00</span> <span class="label">ساعة</span>
-                    <span id="minutes">00</span> <span class="label">دقيقة</span>
-                    <span id="seconds">00</span> <span class="label">ثانية</span>
-                </div>
-            </div>
+        <!-- رسائل حب متغيرة -->
+        <div class="love-message" id="loveMessage">❤️ اضغط على القلب</div>
 
-            <div id="messageBox" class="message-box">
-                اضغط على القلب ❤️
-            </div>
-
-            <div class="lyrics-container" id="lyricsContainer">
-                <div class="lyric-line active">🎵 مش حبيبي بس.. أنا حبيبي</div>
-                <div class="lyric-line">❤️ أنا اللي قلبي ليكي</div>
-            </div>
-
-            <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="time-display">
-                <span id="currentTime">0:00</span>
-                <span id="totalTime">0:00</span>
-            </div>
-
-            <div class="buttons">
-                <button onclick="showLove()">🌹 كلمني حب</button>
-                <button onclick="toggleMusic()" id="musicToggleBtn">▶️ تشغيل الأغنية</button>
-            </div>
-
-            <p class="footer">🇪🇬 من قلب مصري بيحبك ❤️</p>
+        <!-- الأزرار -->
+        <div class="button-container">
+            <button class="btn btn-yes" onclick="sayYes()">🩷 بحبك</button>
+            <button class="btn btn-no" id="noBtn" onmouseover="runAway()">💔 لا</button>
         </div>
     </div>
-
-    <!-- ========== مصدر الصوت ========== -->
-    <audio id="loveSong" src="song.mp3"></audio>
 
     <script>
         // =============================================
         // ========== كل الجافاسكريبت هنا ==========
         // =============================================
 
-        let musicStarted = false;
-        let flowersStarted = false;
-        let noBtnClicks = 0;
+        // ---- 1. قلوب متطايرة ----
+        function createFloatingHearts() {
+            var container = document.getElementById('floatingHearts');
+            var hearts = ['❤️', '💕', '💖', '💗', '💓', '♥️', '💝'];
 
-        // ---- 1. التحقق من الباسورد ----
-        function checkPassword() {
-            const input = document.getElementById('passwordInput');
-            const error = document.getElementById('loginError');
-            const password = 'love';
-
-            if (input.value.toLowerCase() === password) {
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('questionScreen').classList.add('active');
-                error.style.display = 'none';
-            } else {
-                error.style.display = 'block';
-                input.value = '';
-                input.focus();
-                const box = document.querySelector('.login-box');
-                box.style.animation = 'shake 0.5s';
-                setTimeout(() => { box.style.animation = ''; }, 500);
+            for (var i = 0; i < 35; i++) {
+                var heart = document.createElement('span');
+                heart.className = 'heart-float';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (25 + Math.random() * 45) + 'px';
+                heart.style.animationDuration = (12 + Math.random() * 22) + 's';
+                heart.style.animationDelay = (Math.random() * 18) + 's';
+                container.appendChild(heart);
             }
         }
+        createFloatingHearts();
 
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        // ---- 2. إجابة "أيوه" ----
-        function answerYes() {
-            document.getElementById('questionScreen').classList.remove('active');
-            document.getElementById('mainContent').classList.add('active');
-            startEverything();
-        }
-
-        // ---- 3. زر "لا" يهرب ----
-        function runAway() {
-            const btn = document.getElementById('noBtn');
-            const box = document.querySelector('.question-box');
-            const boxRect = box.getBoundingClientRect();
-
-            const maxX = boxRect.width - btn.offsetWidth - 20;
-            const maxY = boxRect.height - btn.offsetHeight - 20;
-
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-
-            btn.style.position = 'absolute';
-            btn.style.left = newX + 'px';
-            btn.style.top = newY + 'px';
-            btn.style.transition = '0.15s ease';
-
-            noBtnClicks++;
-
-            if (noBtnClicks > 5) {
-                const msgs = [
-                    '😘 أنتِ عارفة إنك بتحبيني',
-                    '💕 مش هتهربي من الحقيقة',
-                    '❤️ قولي أيوه يا جميلة',
-                    '🌹 أنتِ ملكة قلبي، قولي أيوه'
-                ];
-                const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
-                document.querySelector('.question-box p').textContent = randomMsg;
-            }
-
-            document.getElementById('questionScreen').style.animation = 'shake 0.3s';
-            setTimeout(() => {
-                document.getElementById('questionScreen').style.animation = '';
-            }, 300);
-
-            const currentSize = parseFloat(window.getComputedStyle(btn).fontSize);
-            if (currentSize > 14) {
-                btn.style.fontSize = (currentSize - 2) + 'px';
-                btn.style.padding = (parseFloat(window.getComputedStyle(btn).paddingTop) - 2) + 'px 20px';
-            }
-
-            const texts = ['💔 لا', '😅 لا', '🙈 لا', '😜 لا', '🥺 لا', '😘 أيوه'];
-            if (noBtnClicks % 3 === 0) {
-                btn.textContent = texts[Math.floor(Math.random() * texts.length)];
+        // ---- 2. فقاعات ----
+        function createBubbles() {
+            var container = document.getElementById('bubbles');
+            for (var i = 0; i < 25; i++) {
+                var bubble = document.createElement('span');
+                bubble.className = 'bubble';
+                bubble.style.left = Math.random() * 100 + '%';
+                var size = 15 + Math.random() * 40;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.animationDuration = (18 + Math.random() * 28) + 's';
+                bubble.style.animationDelay = (Math.random() * 25) + 's';
+                bubble.style.background = 'rgba(255, 182, 193, ' + (0.05 + Math.random() * 0.1) + ')';
+                container.appendChild(bubble);
             }
         }
+        createBubbles();
 
-        // ---- 4. بدء كل شيء ----
-        function startEverything() {
-            if (musicStarted) return;
-            musicStarted = true;
+        // ---- 3. نجوم ----
+        function createStars() {
+            var container = document.getElementById('stars');
+            var emojis = ['✦', '✧', '⭐', '✨', '💫', '✶'];
 
-            setTimeout(() => {
-                playMusic();
-            }, 500);
-
-            if (!flowersStarted) {
-                flowersStarted = true;
-                createFlowers();
+            for (var i = 0; i < 60; i++) {
+                var star = document.createElement('span');
+                star.className = 'star';
+                star.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.fontSize = (12 + Math.random() * 24) + 'px';
+                star.style.animationDelay = (Math.random() * 4) + 's';
+                star.style.animationDuration = (2 + Math.random() * 3) + 's';
+                container.appendChild(star);
             }
+        }
+        createStars();
 
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+        // ---- 4. زخات القلوب ----
+        function createHeartRain() {
+            var body = document.body;
+            var heart = document.createElement('span');
+            heart.className = 'heart-rain';
+            var hearts = ['❤️', '💕', '💖', '💗', '💓', '♥️', '💝'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = (Math.random() * 92 + 4) + '%';
+            heart.style.fontSize = (30 + Math.random() * 50) + 'px';
+            heart.style.animationDuration = (3.5 + Math.random() * 4.5) + 's';
+            body.appendChild(heart);
+
+            setTimeout(function() {
+                heart.remove();
+            }, 8000);
         }
 
-        // ---- 5. رسائل الحب (بتتغير بالضغط على القلب) ----
-        const loveMessages = [
-            "♡ يا روح قلبي، انتي كل حاجة في حياتي",
+        // ---- 5. رسائل الحب ----
+        var loveMessages = [
+            "♡ يا روح قلبي، أنتِ كل حاجة في حياتي",
             "♡ ضحكتك بتخلص هموم الدنيا كلها",
             "♡ عينيكي البحر اللي عايز أغرق فيه",
             "♡ من غيرك الدنيا رماد يا قمر",
             "♡ كل يوم بحبك أكتر من اللي قبله",
-            "♡ يا ست الكل، انتي ملكة قلبي",
+            "♡ يا ست الكل، أنتِ ملكة قلبي",
             "♡ حبك جوة دمي ومش طايق أستنى",
             "♡ لو الدنيا تروح وترجع، هختارك أنتِ",
-            "♡ انتي أحلى هدية من ربنا ليا",
-            "♡ كلام الحب قليل قدام عيونك"
+            "♡ أنتِ أحلى هدية من ربنا ليا",
+            "♡ كلام الحب قليل قدام عيونك",
+            "♡ بحبك موت يا حبيبتي",
+            "♡ عمري كله ليكِ أنتِ"
         ];
 
-        // دالة جديدة لتغيير الرسالة عند الضغط على القلب
-        function changeLoveMessage() {
-            const box = document.getElementById('messageBox');
-            const randomIndex = Math.floor(Math.random() * loveMessages.length);
-            box.innerHTML = loveMessages[randomIndex];
-            box.style.transform = 'scale(0.95)';
-            setTimeout(() => { box.style.transform = 'scale(1)'; }, 150);
-        }
+        var statusMessages = [
+            "💖 أنتِ كل حياتي",
+            "💕 قلبي ملكك أنتِ",
+            "❤️ بحبك موت",
+            "💗 أنتِ روحي",
+            "💓 عمري كله ليكِ",
+            "♥️ حبيبتي الأبدية",
+            "💝 أنتِ ملكة قلبي"
+        ];
 
-        // دالة زر "كلمني حب"
         function showLove() {
-            const box = document.getElementById('messageBox');
-            const randomIndex = Math.floor(Math.random() * loveMessages.length);
-            box.innerHTML = loveMessages[randomIndex];
-        }
+            // تغيير رسالة الحب
+            var msgBox = document.getElementById('loveMessage');
+            var randomIndex = Math.floor(Math.random() * loveMessages.length);
+            msgBox.textContent = loveMessages[randomIndex];
+            msgBox.style.opacity = '0';
+            setTimeout(function() { msgBox.style.opacity = '1'; }, 100);
 
-        // ---- 6. تشغيل الأغنية مع الكلمات ----
-        const audio = document.getElementById('loveSong');
-        let isPlaying = false;
+            // تغيير رسالة الحالة
+            var status = document.getElementById('status');
+            var statusIndex = Math.floor(Math.random() * statusMessages.length);
+            status.textContent = statusMessages[statusIndex];
+            status.style.transform = 'scale(1.3)';
+            status.style.color = '#ff6b8a';
+            setTimeout(function() {
+                status.style.transform = 'scale(1)';
+                status.style.color = '#ffb6c1';
+            }, 400);
 
-        // كلمات أغنية "مش حبيبي بس" - أنغام
-        const lyrics = [
-            { time: 0, text: '🎵 مش حبيبي بس.. أنا حبيبي' },
-            { time: 4, text: '❤️ أنا اللي قلبي ليكي' },
-            { time: 8, text: '🌹 مش حبيبي بس.. أنا عمري' },
-            { time: 12, text: '💕 أنا اللي روحي فيكي' },
-            { time: 16, text: '✨ أنا اللي بحبك بجنون' },
-            { time: 20, text: '🌟 وقلبي مالهوش غيرك' },
-            { time: 24, text: '💖 مش حبيبي بس.. أنا حبيبي' },
-            { time: 28, text: '❤️ أنا اللي عايش ليكي' },
-            { time: 32, text: '🎵 لو تسألي عني يوم' },
-            { time: 36, text: '🌹 هتلاقيني جنبك' },
-            { time: 40, text: '💕 مش حبيبي بس.. أنا حبيبي' },
-            { time: 44, text: '❤️ أنا اللي بحبك أنتِ' },
-            { time: 48, text: '🎵 طول عمري بحبك أنتِ' },
-            { time: 52, text: '🌹 مش حبيبي بس.. للأبد' }
-        ];
-
-        let lyricInterval = null;
-        let currentLyricIndex = 0;
-
-        function playMusic() {
-            const audio = document.getElementById('loveSong');
-            audio.play()
-                .then(() => {
-                    isPlaying = true;
-                    document.getElementById('musicToggleBtn').textContent = '⏸️ إيقاف الأغنية';
-                    startLyrics();
-                    updateProgress();
-                })
-                .catch((error) => {
-                    console.error('خطأ في تشغيل الأغنية:', error);
-                    alert('❌ مفيش أغنية موجودة!\n\n📥 حمل أغنية "مش حبيبي بس" لأنغام\n📁 سمي الملف song.mp3\n📂 وحطه جنب ملف index.html');
-                });
-        }
-
-        function toggleMusic() {
-            const audio = document.getElementById('loveSong');
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-                document.getElementById('musicToggleBtn').textContent = '▶️ تشغيل الأغنية';
-                clearInterval(lyricInterval);
-            } else {
-                audio.play()
-                    .then(() => {
-                        isPlaying = true;
-                        document.getElementById('musicToggleBtn').textContent = '⏸️ إيقاف الأغنية';
-                        startLyrics();
-                        updateProgress();
-                    })
-                    .catch((error) => {
-                        console.error('خطأ في تشغيل الأغنية:', error);
-                        alert('❌ مفيش أغنية موجودة!\n\n📥 حمل أغنية "مش حبيبي بس" لأنغام\n📁 سمي الملف song.mp3\n📂 وحطه جنب ملف index.html');
-                    });
+            // زخات قلوب (8 قلوب)
+            for (var i = 0; i < 10; i++) {
+                setTimeout(createHeartRain, i * 120);
             }
+
+            // تأثير وميض الخلفية
+            document.body.classList.add('bg-glow');
+            setTimeout(function() {
+                document.body.classList.remove('bg-glow');
+            }, 1000);
+
+            // تكبير القلب مؤقتاً
+            var heart = document.getElementById('mainHeart');
+            heart.style.transform = 'scale(1.4)';
+            setTimeout(function() {
+                heart.style.transform = 'scale(1)';
+            }, 300);
         }
 
-        function startLyrics() {
-            clearInterval(lyricInterval);
-            currentLyricIndex = 0;
-            const container = document.getElementById('lyricsContainer');
-            const lines = container.querySelectorAll('.lyric-line');
-
-            lines.forEach(line => line.classList.remove('active'));
-
-            lyricInterval = setInterval(() => {
-                const audio = document.getElementById('loveSong');
-                const currentTime = audio.currentTime;
-
-                for (let i = 0; i < lyrics.length; i++) {
-                    if (currentTime >= lyrics[i].time) {
-                        currentLyricIndex = i;
-                    }
-                }
-
-                lines.forEach((line, index) => {
-                    if (index === currentLyricIndex) {
-                        line.classList.add('active');
-                        line.scrollIntoView({ block: 'center', behavior: 'smooth' });
-                    } else {
-                        line.classList.remove('active');
-                    }
-                });
-
-                if (audio.ended) {
-                    clearInterval(lyricInterval);
-                    isPlaying = false;
-                    document.getElementById('musicToggleBtn').textContent = '▶️ تشغيل الأغنية';
-                }
+        // ---- 6. زر "بحبك" ----
+        function sayYes() {
+            var status = document.getElementById('status');
+            status.textContent = '❤️ أنا كمان بحبك موت ❤️';
+            status.style.color = '#ff6b8a';
+            status.style.fontSize = '40px';
+            status.style.transform = 'scale(1.3)';
+            setTimeout(function() {
+                status.style.transform = 'scale(1)';
             }, 500);
-        }
 
-        // ---- 7. مؤقت التقدم ----
-        function updateProgress() {
-            const audio = document.getElementById('loveSong');
-            const progressFill = document.getElementById('progressFill');
-            const currentTimeDisplay = document.getElementById('currentTime');
-            const totalTimeDisplay = document.getElementById('totalTime');
-
-            audio.addEventListener('loadedmetadata', () => {
-                totalTimeDisplay.textContent = formatTime(audio.duration);
-            });
-
-            audio.addEventListener('timeupdate', () => {
-                if (audio.duration) {
-                    const progress = (audio.currentTime / audio.duration) * 100;
-                    progressFill.style.width = progress + '%';
-                    currentTimeDisplay.textContent = formatTime(audio.currentTime);
-                }
-            });
-        }
-
-        function formatTime(seconds) {
-            if (!seconds || isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return mins + ':' + (secs < 10 ? '0' : '') + secs;
-        }
-
-        function seekAudio(e) {
-            const audio = document.getElementById('loveSong');
-            const bar = document.getElementById('progressBar');
-            const rect = bar.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percent = x / rect.width;
-            if (audio.duration) {
-                audio.currentTime = percent * audio.duration;
+            // زخات قلوب كثيفة (25 قلب)
+            for (var i = 0; i < 25; i++) {
+                setTimeout(createHeartRain, i * 100);
             }
+
+            // تغيير خلفية
+            document.body.style.background = 'linear-gradient(135deg, #4a0a0a, #6a0a0a, #4a0a0a)';
+            setTimeout(function() {
+                document.body.style.background = 'linear-gradient(135deg, #1a0a0a, #2d0a0a, #1a0a0a)';
+            }, 3000);
+
+            // تغيير نص الزر
+            var btn = document.querySelector('.btn-yes');
+            btn.textContent = '❤️ أنتِ ملكتي';
+            btn.style.background = 'linear-gradient(145deg, #ff6b8a, #ff4d6d)';
+            btn.style.fontSize = '28px';
+            btn.style.padding = '20px 55px';
+
+            // تكبير القلب
+            var heart = document.getElementById('mainHeart');
+            heart.style.transform = 'scale(1.5)';
+            setTimeout(function() {
+                heart.style.transform = 'scale(1)';
+            }, 400);
+
+            // تغيير رسالة الحب
+            document.getElementById('loveMessage').textContent = '💖 أنتِ كل الدنيا بالنسبة لي';
         }
 
-        // ---- 8. العد التنازلي من آخر جمعة ----
-        function getLastFriday() {
-            const now = new Date();
-            const day = now.getDay();
-            const diff = (day >= 5) ? (day - 5) : (day + 2);
-            const lastFriday = new Date(now);
-            lastFriday.setDate(now.getDate() - diff);
-            lastFriday.setHours(0, 0, 0, 0);
-            return lastFriday;
-        }
+        // ---- 7. زر "لا" يهرب ----
+        var noClicks = 0;
 
-        const targetDate = getLastFriday();
+        function runAway() {
+            var btn = document.getElementById('noBtn');
+            var container = document.querySelector('.button-container');
+            var rect = container.getBoundingClientRect();
 
-        function updateCountdown() {
-            const now = new Date();
-            const diff = now - targetDate;
+            var maxX = rect.width - btn.offsetWidth - 20;
+            var maxY = rect.height - btn.offsetHeight - 20;
 
-            if (diff < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
+            var newX = Math.random() * maxX;
+            var newY = Math.random() * maxY;
+
+            btn.style.position = 'absolute';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+            btn.style.transition = '0.08s';
+
+            noClicks++;
+
+            var msgs = [
+                '😘 أنتِ عارفة إنك بتحبيني',
+                '💕 مش هتهربي من الحقيقة',
+                '❤️ قولي بحبك يا جميلة',
+                '🌹 أنتِ ملكة قلبي',
+                '💖 متستنيش كتير'
+            ];
+
+            if (noClicks > 3) {
+                var status = document.getElementById('status');
+                status.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+                status.style.color = '#ff8fa3';
+            }
+
+            // بعد 7 محاولات، الزر يتحول لـ "بحبك"
+            if (noClicks > 7) {
+                btn.textContent = '😘 أحبك';
+                btn.style.background = 'linear-gradient(145deg, #ff4d6d, #d84b6b)';
+                btn.style.boxShadow = '0 8px 0 #892e44';
+                btn.style.color = 'white';
+                btn.style.fontSize = '26px';
+                btn.style.padding = '18px 50px';
+
+                // يخليها تضغط "بحبك" لوحدها بعد شوية
+                setTimeout(function() {
+                    sayYes();
+                }, 600);
                 return;
             }
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            // تهتز الشاشة
+            document.body.style.animation = 'shake 0.3s';
+            setTimeout(function() { document.body.style.animation = ''; }, 300);
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            // قلب يتساقط
+            createHeartRain();
         }
 
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        // ---- 8. تغيير الرسالة كل 6 ثواني ----
+        setInterval(function() {
+            var msgBox = document.getElementById('loveMessage');
+            var randomIndex = Math.floor(Math.random() * loveMessages.length);
+            msgBox.textContent = loveMessages[randomIndex];
+        }, 6000);
 
-        // ---- 9. الورود المتساقطة ----
-        function createFlowers() {
-            const container = document.getElementById('flowersContainer');
-            const flowers = ['🌸', '🌹', '💐', '🌺', '🌷', '🌸', '🌹', '💮'];
+        console.log('❤️ موقع الحب جاهز!');
+        console.log('💕 كل القلوب بتنبض ليكِ');
+        console.log('💖 قلبك بينبض بالحب');
+    </script>
 
-            for (let i = 0; i < 40; i++) {
-                const flower = document.createElement('span');
-                flower.className = 'flower';
-                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-                flower.style.left = Math.random() * 100 + '%';
-                flower.style.fontSize = (20 + Math.random() * 30) + 'px';
-                flower.style.animationDuration = (8 + Math.random() * 15) + 's';
-                flower.style.animationDelay = (Math.random() * 12) + 's';
-                container.appendChild(flower);
-            }
-        }
-
-        // ---- 10. إنشاء الكلمات مبدئياً ----
-        function initLyrics() {
-            const container = document.getElementById('lyricsContainer');
-            container.innerHTML = '';
-            lyrics.forEach((lyric, index) => {
-                const div = document.createElement('div');
-                div.className = 'lyric-line' + (index === 0 ? ' active' : '');
-                div.textContent = lyric.text;
-                container.appendChild(div);
-            });
-        }
-        initLyrics();
-
-        // ---- 11. التحقق من وجود الأغنية عند التحميل ----
-        window.addEventListener('load', function() {
-            const audio = document.getElementById('loveSong');
-            // نفحص إذا كان الملف موجود
-            fetch('song.mp3')
-                .then(response => {
-                    if (!response.ok) {
-                        console.warn('⚠️ ملف الأغنية مش موجود!');
-                    } else {
-                        console.log('✅ ملف الأغنية موجود');
-                    }
-                })
-                .catch(() => {
-                    console.warn('⚠️ ملف الأغنية مش موجود!');
-                });
-        });
-
-        console.log('❤️ الموقع جاه
+</body>
+</html>
